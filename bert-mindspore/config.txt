@@ -1,0 +1,65 @@
+
+sudo mkdir -p ms_log
+CUR_DIR=`pwd`
+PROJECT_DIR=$(cd "$(dirname "$0")" || exit; pwd)
+export GLOG_log_dir=${CUR_DIR}/ms_log
+export GLOG_logtostderr=0
+sudo python -u ${PROJECT_DIR}/../my_ubuntu_classifier.py  \
+    --device_target="GPU" \
+    --do_train="true" \
+    --do_eval="true" \
+    --do_predict="true" \
+    --assessment_method="f1" \
+    --device_id=0 \
+    --epoch_num=4 \
+    --num_class=2 \
+    --train_data_shuffle="true" \
+    --eval_data_shuffle="false" \
+    --predict_data_shuffle="false" \
+    --train_batch_size=128 \
+    --eval_batch_size=8 \
+    --predict_batch_size=8 \
+    --save_finetune_checkpoint_path="./data/base" \
+    --load_pretrain_checkpoint_path="./data/base/bert_base.ckpt" \
+    --load_finetune_checkpoint_path="" \
+    --train_data_file_path="./data/train.tf_record" \
+    --eval_data_file_path="./data/eval.tf_record" \
+    --predict_data_file_path="./data/predict.tf_record" \
+    --predict_result_path='./data/predict_result.csv' \
+    --schema_file_path=""  2>&1 | tee -a classifier_log.txt &
+
+
+
+
+
+device_target=GPU ;
+do_train=false ;
+do_eval=false ;
+do_predict=true ;
+assessment_method=F1;
+device_id=0 ;
+epoch_num=4 ;
+num_class=2 ;
+train_data_shuffle=true ;
+eval_data_shuffle=false ;
+predict_data_shuffle=false;
+train_batch_size=128 ;
+eval_batch_size=8 ;
+predict_batch_size=8 ;
+save_finetune_checkpoint_path= ./data/base; 
+load_pretrain_checkpoint_path= ./data/base/bert_base.ckpt;
+load_finetune_checkpoint_path= ./data/base/classifier-4_17523.ckpt;
+train_data_file_path= ./data/train.tf_record; 
+eval_data_file_path= ./data/eval.tf_record;
+
+predict_data_file_path= ./data/predict.tf_record;
+predict_result_path=./data/predict_result.csv;
+
+
+
+
+
+
+
+
+
