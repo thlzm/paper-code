@@ -1,0 +1,166 @@
+OBS Path：obs://tf-bert/tf-base-classification/keywords_data/tf_output
+Data Path in OBS: obs://tf-bert/tf-base-classification/keywords_data
+
+
+task_name=myTask;
+do_train=True;
+do_eval=True;
+do_predict=True;
+data_dir=obs://tf-bert-base/keywords_data;
+vocab_file=obs://tf-bert-base/GLUE/BERT_BASE_DIR/chinese_L-12_H-768_A-12/vocab.txt;
+bert_config_file=obs://tf-bert-base/GLUE/BERT_BASE_DIR/chinese_L-12_H-768_A-12/bert_config.json;
+init_checkpoint=obs://tf-bert-base/GLUE/BERT_BASE_DIR/chinese_L-12_H-768_A-12/bert_model.ckpt;
+max_seq_length=128;train_batch_size=1024;
+learning_rate=2e-5;num_train_epochs=1.0;
+output_dir=obs://tf-bert-base/keywords_data/tf_output;stopwords_file=stopwords.txt
+
+
+
+task_name=myTask;
+do_train=True;
+do_eval=True;
+do_predict=True;
+data_dir=s3://tf-bert-base/keywords_data;
+vocab_file=s3://tf-bert-base/GLUE/BERT_BASE_DIR/chinese_L-12_H-768_A-12/vocab.txt;
+bert_config_file=s3://tf-bert-base/GLUE/BERT_BASE_DIR/chinese_L-12_H-768_A-12/bert_config.json;
+init_checkpoint=s3://tf-bert-base/GLUE/BERT_BASE_DIR/chinese_L-12_H-768_A-12/bert_model.ckpt;
+max_seq_length=128;
+train_batch_size=1024;
+learning_rate=2e-5;
+num_train_epochs=1.0;
+stopwords_file=stopwords.txt;
+
+
+
+
+task_name=myTask;
+do_train=true;
+do_eval=true;
+do_predict=true;
+data_dir=./keywords_data;
+vocab_file=./GLUE/BERT_BASE_DIR/chinese_L-12_H-768_A-12/vocab.txt;
+bert_config_file=./GLUE/BERT_BASE_DIR/chinese_L-12_H-768_A-12/bert_config.json;
+init_checkpoint=./GLUE/BERT_BASE_DIR/chinese_L-12_H-768_A-12/bert_model.ckpt;
+max_seq_length=128;
+train_batch_size=1024;
+learning_rate=2e-5;
+num_train_epochs=3.0;
+output_dir=./keywords_data/tf_output;
+stopwords_file=./keywords_data/stopwords.txt;
+
+
+# 大型数据
+task_name=myTask;
+do_train=true;
+do_eval=true;
+do_predict=false;
+data_dir=./pseudo_data;
+vocab_file=./GLUE/BERT_BASE_DIR/chinese_L-12_H-768_A-12/vocab.txt;
+bert_config_file=./GLUE/BERT_BASE_DIR/chinese_L-12_H-768_A-12/bert_config.json;
+init_checkpoint=./GLUE/BERT_BASE_DIR/chinese_L-12_H-768_A-12/bert_model.ckpt;
+max_seq_length=128;
+train_batch_size=128;
+learning_rate=2e-5;
+num_train_epochs=3.0;
+output_dir=./keywords_data/tf_output;
+stopwords_file=./keywords_data/stopwords.txt;
+
+
+task_name=myTask;
+do_train=true;
+do_eval=true;
+do_predict=true;
+data_dir=./no_data;
+vocab_file=./GLUE/BERT_BASE_DIR/chinese_L-12_H-768_A-12/vocab.txt;
+bert_config_file=./GLUE/BERT_BASE_DIR/chinese_L-12_H-768_A-12/bert_config.json;
+init_checkpoint=./GLUE/BERT_BASE_DIR/chinese_L-12_H-768_A-12/bert_model.ckpt;
+max_seq_length=128;
+train_batch_size=128;
+learning_rate=2e-5;
+num_train_epochs=1;
+output_dir=./keywords_data/tf_output;
+stopwords_file=./keywords_data/stopwords.txt;
+
+# final run
+
+
+
+
+
+
+
+task_name=myTask;
+do_train=false;
+do_eval=false;
+do_predict=true;
+data_dir=s3://uibe-nlp-paper/data/inputs/bert-tensorflow-input;
+vocab_file=s3://uibe-nlp-paper/data/inputs/bert-tensorflow-input/chinese_L-12_H-768_A-12/vocab.txt;
+bert_config_file=s3://uibe-nlp-paper/data/inputs/bert-tensorflow-input/chinese_L-12_H-768_A-12/bert_config.json;
+init_checkpoint=s3://uibe-nlp-paper/data/inputs/bert-tensorflow-input/chinese_L-12_H-768_A-12/bert_model.ckpt;
+max_seq_length=128;
+train_batch_size=256;
+learning_rate=2e-5;
+num_train_epochs=4;
+output_dir=s3://uibe-nlp-paper/data/outputs/bert-tensorflow-output;
+stopwords_file=/home/work/user-job-dir/data/inputs/bert-tensorflow-input/stopwords.txt;
+
+
+
+task_name=myTask;
+do_train=false;
+do_eval=false;
+do_predict=true;
+data_dir=/home/work/user-job-dir/;
+vocab_file=/home/work/user-job-dir/chinese_L-12_H-768_A-12/vocab.txt;
+bert_config_file=/home/work/user-job-dir/chinese_L-12_H-768_A-12/bert_config.json;
+init_checkpoint=/home/work/user-job-dir/chinese_L-12_H-768_A-12/bert_model.ckpt;
+max_seq_length=128;
+train_batch_size=128;
+learning_rate=2e-5;
+num_train_epochs=4;
+output_dir=/home/work/user-job-dir/;
+stopwords_file=/home/work/user-job-dir/stopwords.txt;
+
+
+# eval 2022-03-30
+echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc
+source ~/.bashrc
+conda activate /home/ma-user/miniconda3/envs/TensorFlow-1.15.0
+pip install jieba
+
+cd /home/ma-user/work
+python ./code/my_classifier.py \
+-task_name=myTask \
+-do_train=false \
+-do_eval=true \
+-do_predict=false \
+-data_dir=./data/ \
+-vocab_file=./data/vocab.txt \
+-bert_config_file=./data/bert_config.json \
+-init_checkpoint=./data/bert_model.ckpt \
+-max_seq_length=128 \
+-train_batch_size=128 \
+-learning_rate=2e-5 \
+-num_train_epochs=1 \
+-output_dir=./data/ \
+-stopwords_file=./stopwords.txt \
+-train_url=./no_data \
+-num_gpus=1
+
+
+
+
+task_name=myTask;
+do_train=false;
+do_eval=true;
+do_predict=false;
+data_dir=./no_data;
+vocab_file=./data/vocab.txt;
+bert_config_file=./data/bert_config.json;
+init_checkpoint=./data/bert_model.ckpt;
+max_seq_length=128;
+train_batch_size=128;
+learning_rate=2e-5;
+num_train_epochs=1;
+output_dir=./output;
+stopwords_file=./stopwords.txt;
